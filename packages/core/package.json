@@ -1,0 +1,31 @@
+{
+    "name": "funx",
+    "version": "0.0.1",
+    "description": "",
+    "main": "dist/index.js",
+    "scripts": {
+        "test": "tape -r @scripts/babel-tape test/**/*.js | tap-dot",
+        "build": "rollup -c --silent"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/are/funx.git"
+    },
+    "author": "Artur Wojciechowski <me@iama.re>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/are/funx/issues"
+    },
+    "homepage": "https://github.com/are/funx#readme",
+    "devDependencies": {
+        "@babel/core": "^7.7.2",
+        "@babel/preset-env": "^7.7.1",
+        "@babel/register": "^7.7.0",
+        "@scripts/babel-tape": "0.0.1",
+        "lerna": "^3.16.4",
+        "rollup": "^1.27.0",
+        "rollup-plugin-babel": "^4.3.3",
+        "tap-dot": "^2.0.0",
+        "tape": "^4.11.0"
+    }
+}
