@@ -14,11 +14,11 @@ This is description.
 
 #### Table of Contents
 
--   [Constructor](#constructor)
 -   [construct](#construct)
     -   [Parameters](#parameters)
-
-### Constructor
+-   [Test](#test)
+-   [Construct](#construct-1)
+    -   [Parameters](#parameters-1)
 
 ### construct
 
@@ -28,6 +28,18 @@ that accepts operators as arguments.
 
 #### Parameters
 
--   `operators` **...any** 
+-   `operators` **...any**
 
-Returns **[Constructor](#constructor)** 
+Returns **[Construct](#construct)**
+
+### Test
+
+This is a test class.
+
+### Construct
+
+An instance of this class is returned by `construct` function.
+
+#### Parameters
+
+-   `operators` **\[Operator]**

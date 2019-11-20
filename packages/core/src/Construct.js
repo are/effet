@@ -1,35 +1,6 @@
 import { StageError } from './errors'
 
-const TYPE = {
-    NOTIFY: Symbol('Stage.type notify'),
-    TRANSFORM: Symbol('Stage.type transform'),
-    EFFECT: Symbol('Stage.type effect')
-}
-
-class Stage {
-    constructor(type, name, { input, output, catchToOutput } = {}) {
-        this.type = type
-        this.name = name
-
-        this.input = input
-        this.output = output
-        this.catchToOutput = catchToOutput ?? false
-    }
-
-    getStage() {
-        if (this.type === TYPE.NOTIFY) {
-            return 'notifyStage'
-        } else if (this.type === TYPE.TRANSFORM) {
-            return 'transformStage'
-        } else if (this.type === TYPE.EFFECT) {
-            return 'effectStage'
-        }
-    }
-
-    static of(type, name, opts) {
-        return new Stage(type, name, opts)
-    }
-}
+import { TYPE, Stage } from './Stage'
 
 const NONE = Symbol('none')
 const INPUT = Symbol('input')
@@ -61,7 +32,7 @@ const STAGES = [
  *
  * @param {[Operator]} operators
  */
-export class Constructor {
+class Construct {
     constructor(operators) {
         this.operators = operators
     }
@@ -70,6 +41,11 @@ export class Constructor {
         this.operators = [...this.operators, ...operators]
     }
 
+    /**
+     * Run specified transform stage.
+     *
+     * @private
+     */
     async transformStage(stage, data, options) {
         const operators = this.operators.filter(
             operator => typeof operator[stage] === 'function'
@@ -83,6 +59,11 @@ export class Constructor {
         return $result
     }
 
+    /**
+     * Run specified notify stage.
+     *
+     * @private
+     */
     async notifyStage(stage, data, options) {
         const operators = this.operators.filter(
             operator => typeof operator[stage] === 'function'
@@ -93,6 +74,11 @@ export class Constructor {
         }
     }
 
+    /**
+     * Run specified effect stage.
+     *
+     * @private
+     */
     async effectStage(stage, data, options) {
         const operator = this.operators.reduce(
             (current, next) =>
@@ -136,3 +122,5 @@ export class Constructor {
         return ctx.get(OUTPUT)
     }
 }
+
+export { Construct }

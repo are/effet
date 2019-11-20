@@ -6,7 +6,7 @@
     "scripts": {
         "test": "run-tests",
         "build": "rollup -c --silent",
-        "doc:generate": "documentation readme src/index.js --document-exported --section API"
+        "doc:generate": "documentation readme src/*.js --babel=.babelrc --shallow --section API"
     },
     "repository": {
         "type": "git",

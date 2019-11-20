@@ -1,4 +1,4 @@
-import { Constructor } from './Constructor'
+import { Construct } from './Construct'
 
 /**
  * This is the main juice of the library.
@@ -6,7 +6,12 @@ import { Constructor } from './Constructor'
  * that accepts operators as arguments.
  *
  * @param  {...[Operator]}
- * @return {Constructor}
+ * @return {Construct}
  */
-export const construct = (...operators) => new Constructor(operators)
-export { Constructor }
+export const construct = (...operators) => new Construct(operators)
+export { Construct }
+
+/**
+ * This is a test class.
+ */
+export class Test {}
