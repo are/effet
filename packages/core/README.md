@@ -20,7 +20,6 @@ This is description.
     -   [Parameters](#parameters-1)
 -   [Operators](#operators)
     -   [source](#source)
-        -   [Parameters](#parameters-2)
 
 ### Construct
 
@@ -28,7 +27,7 @@ An instance of this class is returned by `construct` function.
 
 #### Parameters
 
--   `operators` **\[Operator]**
+-   `operators` **\[Operator]** 
 
 ### construct
 
@@ -38,13 +37,14 @@ that accepts operators as arguments.
 
 #### Parameters
 
--   `operators` **...any**
+-   `operators` **...any** 
 
-Returns **[Construct](#construct)**
+Returns **[Construct](#construct)** 
 
 ### Operators
 
 This is a list of operators that are available in the core package.
+
 
 #### source
 
@@ -53,7 +53,7 @@ value.
 
 ##### Parameters
 
--   `input`
--   `any`
+-   `input`  
+-   `any`  
 
-Returns **Operator**
+Returns **Operator** 
