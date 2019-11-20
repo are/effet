@@ -1,0 +1,12 @@
+{
+    "name": "@scripts/generate-docs",
+    "private": true,
+    "version": "0.0.1",
+    "main": "run.sh",
+    "dependencies": {
+        "documentation": "12.1.4"
+    },
+    "bin": {
+        "generate-docs": "./run.sh"
+    }
+}

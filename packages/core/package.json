@@ -4,9 +4,9 @@
     "description": "",
     "main": "dist/index.js",
     "scripts": {
-        "test": "run-tests",
+        "test": "run-test-harness",
         "build": "rollup -c --silent",
-        "doc:generate": "documentation readme src/*.js --config=documentation.yml --babel=.babelrc --shallow --section API"
+        "doc:generate": "generate-docs"
     },
     "repository": {
         "type": "git",
@@ -24,12 +24,10 @@
         "@babel/plugin-proposal-nullish-coalescing-operator": "7.4.4",
         "@babel/preset-env": "7.7.1",
         "@scripts/run-test-harness": "0.0.2",
+        "@scripts/generate-docs": "0.0.1",
         "prettier": "1.19.1",
         "rollup": "1.27.0",
         "rollup-plugin-babel": "4.3.3"
-    },
-    "dependencies": {
-        "documentation": "12.1.4"
     },
     "gitHead": "a0b16041f8103039a0c2a09d40484194380c21ba"
 }

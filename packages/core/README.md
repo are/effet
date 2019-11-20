@@ -19,6 +19,8 @@ This is description.
 -   [construct](#construct-1)
     -   [Parameters](#parameters-1)
 -   [Operators](#operators)
+    -   [source](#source)
+        -   [Parameters](#parameters-2)
 
 ### Construct
 
@@ -26,7 +28,7 @@ An instance of this class is returned by `construct` function.
 
 #### Parameters
 
--   `operators` **\[Operator]** 
+-   `operators` **\[Operator]**
 
 ### construct
 
@@ -36,11 +38,22 @@ that accepts operators as arguments.
 
 #### Parameters
 
--   `operators` **...any** 
+-   `operators` **...any**
 
-Returns **[Construct](#construct)** 
+Returns **[Construct](#construct)**
 
 ### Operators
 
 This is a list of operators that are available in the core package.
 
+#### source
+
+This operator sets the input data for the effect to an arbitrary
+value.
+
+##### Parameters
+
+-   `input`
+-   `any`
+
+Returns **Operator**
