@@ -1,0 +1,8 @@
+toc:
+  - Construct
+  - construct
+  - name: Operators
+    description: |
+      This is a list of operators that are available in the core package.
+    children:
+      - source

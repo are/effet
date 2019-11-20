@@ -6,7 +6,7 @@
     "scripts": {
         "test": "run-tests",
         "build": "rollup -c --silent",
-        "doc:generate": "documentation readme src/*.js --babel=.babelrc --shallow --section API"
+        "doc:generate": "documentation readme src/*.js --config=documentation.yml --babel=.babelrc --shallow --section API"
     },
     "repository": {
         "type": "git",
@@ -23,7 +23,8 @@
         "@babel/plugin-proposal-class-properties": "7.7.0",
         "@babel/plugin-proposal-nullish-coalescing-operator": "7.4.4",
         "@babel/preset-env": "7.7.1",
-        "@scripts/babel-tap": "^0.0.2-alpha.7+a0b1604",
+        "@scripts/babel-tap": "0.0.1",
+        "prettier": "1.19.1",
         "rollup": "1.27.0",
         "rollup-plugin-babel": "4.3.3"
     },

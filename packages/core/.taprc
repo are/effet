@@ -1,4 +1,4 @@
-files: ["test/**/*.js"]
+files: ["test/**/*.test.js"]
 esm: false
 ts: false
 node-arg: ["-r", "@scripts/babel-tap"]
