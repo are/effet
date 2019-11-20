@@ -1,12 +1,12 @@
-import { InvariantError, StageError } from './errors'
+import { StageError } from './errors'
+
+const TYPE = {
+    NOTIFY: Symbol('Stage.type notify'),
+    TRANSFORM: Symbol('Stage.type transform'),
+    EFFECT: Symbol('Stage.type effect')
+}
 
 class Stage {
-    static TYPE = {
-        NOTIFY: Symbol('Stage.type notify'),
-        TRANSFORM: Symbol('Stage.type transform'),
-        EFFECT: Symbol('Stage.type effect')
-    }
-
     constructor(type, name, { input, output, catchToOutput } = {}) {
         this.type = type
         this.name = name
@@ -16,12 +16,12 @@ class Stage {
         this.catchToOutput = catchToOutput ?? false
     }
 
-    get stage() {
-        if (this.type === this.TYPE.NOTIFY) {
+    getStage() {
+        if (this.type === TYPE.NOTIFY) {
             return 'notifyStage'
-        } else if (this.type === this.TYPE.TRANSFORM) {
+        } else if (this.type === TYPE.TRANSFORM) {
             return 'transformStage'
-        } else if (this.type === this.TYPE.EFFECT) {
+        } else if (this.type === TYPE.EFFECT) {
             return 'effectStage'
         }
     }
@@ -31,6 +31,36 @@ class Stage {
     }
 }
 
+const NONE = Symbol('none')
+const INPUT = Symbol('input')
+const OUTPUT = Symbol('output')
+const EFFECT_INPUT = Symbol('effect_input')
+const EFFECT_OUTPUT = Symbol('effect_output')
+
+const STAGES = [
+    Stage.of(TYPE.NOTIFY, 'invariant', { input: NONE }),
+    Stage.of(TYPE.TRANSFORM, 'preprocess', {
+        input: INPUT,
+        output: EFFECT_INPUT
+    }),
+    Stage.of(TYPE.NOTIFY, 'prepare', { input: EFFECT_INPUT }),
+    Stage.of(TYPE.EFFECT, 'effect', {
+        input: EFFECT_INPUT,
+        output: EFFECT_OUTPUT,
+        catchToOutput: true
+    }),
+    Stage.of(TYPE.TRANSFORM, 'postprocess', {
+        input: EFFECT_OUTPUT,
+        output: OUTPUT
+    }),
+    Stage.of(TYPE.NOTIFY, 'cleanup', { input: NONE })
+]
+
+/**
+ * An instance of this class is returned by `construct` function.
+ *
+ * @param {[Operator]} operators
+ */
 export class Constructor {
     constructor(operators) {
         this.operators = operators
@@ -63,7 +93,7 @@ export class Constructor {
         }
     }
 
-    async reduceStage(stage, data, options) {
+    async effectStage(stage, data, options) {
         const operator = this.operators.reduce(
             (current, next) =>
                 typeof next[stage] === 'function' ? next : current,
@@ -73,44 +103,19 @@ export class Constructor {
         return operator[stage](data, options)
     }
 
-    static NONE = Symbol('none')
-    static INPUT = Symbol('input')
-    static OUTPUT = Symbol('output')
-    static EFFECT_INPUT = Symbol('eff_input')
-    static EFFECT_OUTPUT = Symbol('eff_output')
-
-    static STAGES = [
-        Stage.of(Stage.TYPE.NOTIFY, 'invariant', { input: this.NONE }),
-        Stage.of(Stage.TYPE.TRANSFORM, 'preprocess', {
-            input: this.INPUT,
-            output: this.EFFECT_INPUT
-        }),
-        Stage.of(Stage.TYPE.NOTIFY, 'prepare', { input: this.EFFECT_INPUT }),
-        Stage.of(Stage.TYPE.REDUCE, 'effect', {
-            input: this.EFFECT_INPUT,
-            output: this.EFFECT_OUTPUT,
-            catchToOutput: true
-        }),
-        Stage.of(Stage.TYPE.TRANSFORM, 'postprocess', {
-            input: this.EFFECT_OUTPUT,
-            output: this.OUTPUT
-        }),
-        Stage.of(Stage.TYPE.NOTIFY, 'cleanup', { input: this.NONE })
-    ]
-
     async run(params) {
         const ctx = new Map()
         const options = { ctx, params }
 
-        ctx.set(this.INPUT, null)
-        ctx.set(this.OUTPUT, null)
-        ctx.set(this.NONE, undefined)
+        ctx.set(INPUT, null)
+        ctx.set(OUTPUT, null)
+        ctx.set(NONE, undefined)
 
-        for (let stage of this.STAGES) {
+        for (let stage of STAGES) {
             try {
                 const input = stage.input ? ctx.get(stage.input) : null
 
-                const result = await this[stage.stage](
+                const result = await this[stage.getStage()](
                     stage.name,
                     input,
                     options
@@ -128,6 +133,6 @@ export class Constructor {
             }
         }
 
-        return ctx.get(this.OUTPUT)
+        return ctx.get(OUTPUT)
     }
 }

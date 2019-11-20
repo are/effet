@@ -1,0 +1,16 @@
+{
+    "name": "@scripts/babel-tap",
+    "private": true,
+    "version": "0.0.1",
+    "main": "index.js",
+    "dependencies": {
+        "@babel/register": "7.7.0",
+        "chai": "4.2.0",
+        "sinon": "7.5.0",
+        "sinon-chai": "3.3.0",
+        "tap": "14.9.2"
+    },
+    "bin": {
+        "run-tests": "./run.sh"
+    }
+}

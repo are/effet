@@ -16,6 +16,9 @@ node_modules/
 # Common toolchain intermediate files
 temp
 
+# Coverage
+.nyc_output
+
 # Package lock
 package-lock.json
 dist/

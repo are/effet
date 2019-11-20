@@ -1,6 +1,0 @@
-{
-    "name": "@scripts/babel-tape",
-    "private": true,
-    "version": "0.0.1",
-    "main": "index.js"
-}

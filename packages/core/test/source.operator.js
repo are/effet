@@ -1,0 +1,25 @@
+import { idEffect } from './mocks'
+
+import { construct } from '../src/index'
+import source from '../src/operators/source'
+
+describe('source operator', () => {
+    it('should reject on invariant stage if no arguments passed', async () => {
+        const instance = construct(source())
+
+        try {
+            await instance.run()
+
+            expect.fail()
+        } catch (error) {}
+    })
+
+    it('should pass the input to the effect', async () => {
+        const spy = sinon.fake()
+        const instance = construct(source({}), idEffect(spy))
+
+        await instance.run()
+
+        expect(spy).to.have.been.called
+    })
+})

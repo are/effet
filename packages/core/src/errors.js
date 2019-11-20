@@ -7,13 +7,6 @@ class ConstructionError extends Error {
     }
 }
 
-export class InvariantError extends ConstructionError {
-    constructor(originalError) {
-        super(`Invariant Violation: ${originalError.message}`)
-        this.originalError = originalError
-    }
-}
-
 export class StageError extends ConstructionError {
     constructor(stage, originalError) {
         super(`(${stage}) ${originalError.message}`)
