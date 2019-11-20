@@ -10,8 +10,3 @@ import { Construct } from './Construct'
  */
 export const construct = (...operators) => new Construct(operators)
 export { Construct }
-
-/**
- * This is a test class.
- */
-export class Test {}
