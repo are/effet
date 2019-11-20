@@ -1,7 +1,7 @@
 {
     "name": "@scripts/run-test-harness",
     "private": true,
-    "version": "0.0.1",
+    "version": "0.0.2",
     "main": "index.js",
     "dependencies": {
         "@babel/register": "7.7.0",
@@ -11,6 +11,6 @@
         "tap": "14.9.2"
     },
     "bin": {
-        "run-tests": "./run.sh"
+        "run-test-harness": "./run.sh"
     }
 }

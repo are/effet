@@ -9,7 +9,7 @@
         "build": "lerna run build",
         "test": "lerna run test",
         "postinstall": "npm run bootstrap",
-        "purge": "lerna clean",
+        "purge": "lerna clean && git clean -xfd",
         "refresh": "lerna clean && npm run bootstrap"
     }
 }
