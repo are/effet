@@ -1,5 +1,5 @@
 {
-    "name": "@funx/core",
+    "name": "funx",
     "version": "0.0.2-alpha.7+a0b1604",
     "description": "",
     "main": "dist/index.js",
