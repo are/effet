@@ -1,12 +1,6 @@
-# funx
+# @effet/core
 
-This is description.
-
-## Reasoning
-
-## Usage
-
-## Examples
+Core package. Use this with others to enhance your effects.
 
 ## API
 
@@ -17,10 +11,11 @@ This is description.
 -   [construct](#construct)
     -   [Parameters](#parameters)
 -   [Chain](#chain)
-    -   [Parameters](#parameters-1)
     -   [extend](#extend)
 -   [Operators](#operators)
     -   [source](#source)
+-   [project](#project)
+    -   [Parameters](#parameters-1)
 
 ### construct
 
@@ -30,17 +25,13 @@ that accepts operators as arguments.
 
 #### Parameters
 
--   `operators` **...any** 
+-   `operators` **...any**
 
-Returns **[Chain](#chain)** 
+Returns **[Chain](#chain)**
 
 ### Chain
 
 `construct` returns this instance for convinience.
-
-#### Parameters
-
--   `operators`  
 
 #### extend
 
@@ -57,7 +48,6 @@ Returns **[Chain](#chain)** New, separate instance of Chain.
 
 This is a list of operators that are available in the core package.
 
-
 #### source
 
 This operator sets the input data for the effect to an arbitrary
@@ -68,3 +58,13 @@ value.
 -   `input` **any** A value that will become the new input data
 
 Returns **Operator** An instance of this operator
+
+### project
+
+Assuming the output is an object or an array of objects,
+project filters the resulting properties based on the array of allowed keys.
+
+#### Parameters
+
+-   `keys` **\[[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)]** An array of keys that will be present in the resulting
+    object.

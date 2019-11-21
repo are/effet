@@ -1,3 +1,5 @@
+import { construct } from '../src/index'
+
 export const idEffect = spy =>
     new (class {
         async effect(input, ctx) {
@@ -5,3 +7,12 @@ export const idEffect = spy =>
             return input
         }
     })()
+
+export const makePostEffect = (input, ...ops) =>
+    construct(
+        {
+            preprocess: async () => input
+        },
+        idEffect(),
+        ...ops
+    )

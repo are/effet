@@ -1,5 +1,5 @@
-# funx
+# effet
 
 Functional side-effects with decent error handling.
 
-For details go to [@funx/core](packages/core).
+For details go to [@effet/core](packages/core).

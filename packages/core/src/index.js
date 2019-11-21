@@ -1,4 +1,4 @@
-import { Chain } from './Chain'
+import { Effect } from './Effect'
 
 /**
  * This is the main juice of the library.
@@ -6,7 +6,13 @@ import { Chain } from './Chain'
  * that accepts operators as arguments.
  *
  * @param  {...[Operator]}
- * @return {Chain}
+ * @return {Effect}
  */
-export const construct = (...operators) => new Chain(operators)
-export { Chain }
+export const construct = (...operators) => {
+    const effect = new Effect()
+    effect.operators = operators
+
+    return effect
+}
+
+export { Effect }

@@ -30,21 +30,12 @@ const STAGES = [
 /**
  * `construct` returns this instance for convinience.
  */
-class Chain {
-    /**
-     * This should not be used on its own.
-     *
-     * @private
-     */
-    constructor(operators) {
-        this.operators = operators
-    }
-
+class Effect {
     /**
      * Creates a new effect chain (based on this one), but allows you to extend it
      * with additional operators.
      * @param  {...[Operator]} operators An array of operators to extend the chain.
-     * @return {Chain}               New, separate instance of Chain.
+     * @return {Effect}               New, separate instance of Effect.
      */
     extend(operators) {
         this.operators = [...this.operators, ...operators]
@@ -132,4 +123,4 @@ class Chain {
     }
 }
 
-export { Chain }
+export { Effect }

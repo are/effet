@@ -1,7 +1,7 @@
 {
-    "name": "funx",
-    "version": "0.0.2-alpha.7+a0b1604",
-    "description": "",
+    "name": "effet",
+    "version": "0.1.0",
+    "description": "Composable, declarative effects",
     "main": "dist/index.js",
     "scripts": {
         "test": "run-test-harness",
@@ -10,14 +10,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/are/funx.git"
+        "url": "git+https://github.com/are/effet.git"
     },
     "author": "Artur Wojciechowski <me@iama.re>",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/are/funx/issues"
+        "url": "https://github.com/are/effet/issues"
     },
-    "homepage": "https://github.com/are/funx#readme",
+    "homepage": "https://github.com/are/effet#readme",
     "devDependencies": {
         "@babel/core": "7.7.2",
         "@babel/plugin-proposal-class-properties": "7.7.0",
@@ -28,6 +28,5 @@
         "prettier": "1.19.1",
         "rollup": "1.27.0",
         "rollup-plugin-babel": "4.3.3"
-    },
-    "gitHead": "a0b16041f8103039a0c2a09d40484194380c21ba"
+    }
 }
