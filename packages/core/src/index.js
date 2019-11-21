@@ -1,4 +1,4 @@
-import { Construct } from './Construct'
+import { Chain } from './Chain'
 
 /**
  * This is the main juice of the library.
@@ -6,7 +6,7 @@ import { Construct } from './Construct'
  * that accepts operators as arguments.
  *
  * @param  {...[Operator]}
- * @return {Construct}
+ * @return {Chain}
  */
-export const construct = (...operators) => new Construct(operators)
-export { Construct }
+export const construct = (...operators) => new Chain(operators)
+export { Chain }

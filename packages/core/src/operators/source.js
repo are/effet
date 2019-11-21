@@ -2,8 +2,8 @@
  * This operator sets the input data for the effect to an arbitrary
  * value.
  *
- * @param  {any}
- * @return {Operator}
+ * @param {any} input A value that will become the new input data
+ * @return {Operator} An instance of this operator
  */
 export function source(input) {
     return {

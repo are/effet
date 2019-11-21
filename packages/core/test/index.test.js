@@ -1,18 +1,18 @@
 import { idEffect } from './mocks'
 
-import { construct, Construct } from '../src/index'
+import { construct, Chain } from '../src/index'
 
 import source from '../src/operators/source'
 
 describe('construct function', () => {
-    it('should return an instance of Construct', async () => {
+    it('should return an instance of Chain', async () => {
         const instance = construct()
 
-        expect(instance).to.be.an.instanceof(Construct)
+        expect(instance).to.be.an.instanceof(Chain)
     })
 })
 
-describe('Construct', () => {
+describe('Chain', () => {
     it('should pass an input to the output', async () => {
         const input = Symbol('input')
         const instance = construct(source(input), idEffect())

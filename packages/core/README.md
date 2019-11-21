@@ -14,20 +14,13 @@ This is description.
 
 #### Table of Contents
 
--   [Construct](#construct)
+-   [construct](#construct)
     -   [Parameters](#parameters)
--   [construct](#construct-1)
+-   [Chain](#chain)
     -   [Parameters](#parameters-1)
+    -   [extend](#extend)
 -   [Operators](#operators)
     -   [source](#source)
-
-### Construct
-
-An instance of this class is returned by `construct` function.
-
-#### Parameters
-
--   `operators` **\[Operator]** 
 
 ### construct
 
@@ -39,7 +32,26 @@ that accepts operators as arguments.
 
 -   `operators` **...any** 
 
-Returns **[Construct](#construct)** 
+Returns **[Chain](#chain)** 
+
+### Chain
+
+`construct` returns this instance for convinience.
+
+#### Parameters
+
+-   `operators`  
+
+#### extend
+
+Creates a new effect chain (based on this one), but allows you to extend it
+with additional operators.
+
+##### Parameters
+
+-   `operators` **...\[Operator]** An array of operators to extend the chain.
+
+Returns **[Chain](#chain)** New, separate instance of Chain.
 
 ### Operators
 
@@ -53,7 +65,6 @@ value.
 
 ##### Parameters
 
--   `input`  
--   `any`  
+-   `input` **any** A value that will become the new input data
 
-Returns **Operator** 
+Returns **Operator** An instance of this operator

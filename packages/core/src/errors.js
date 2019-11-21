@@ -1,4 +1,4 @@
-class ConstructionError extends Error {
+class ChainError extends Error {
     constructor(message) {
         super(message)
 
@@ -7,7 +7,7 @@ class ConstructionError extends Error {
     }
 }
 
-export class StageError extends ConstructionError {
+export class StageError extends ChainError {
     constructor(stage, originalError) {
         super(`(${stage}) ${originalError.message}`)
         this.originalError = originalError
