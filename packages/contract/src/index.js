@@ -23,12 +23,13 @@ export function isValid(shape, input) {
 
     shape(input, { fail, path: [] })
 
-    return errorCount === 1
+    return errorCount === 0
 }
 
 export * from './list'
 export * from './object'
 export * from './union'
 export * from './primitives'
+export * from './maybe'
 
 export { getTypeName } from './util'

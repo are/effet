@@ -8,6 +8,7 @@
         "bootstrap": "lerna bootstrap --hoist",
         "build": "lerna run build",
         "test": "lerna run test",
+        "coverage": "lerna run test -- -- --coverage-report=html",
         "postinstall": "npm run bootstrap",
         "purge": "lerna clean && git clean -xfd",
         "refresh": "lerna clean && npm run bootstrap",

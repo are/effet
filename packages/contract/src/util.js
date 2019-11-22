@@ -2,7 +2,6 @@ export const id = x => x
 export const idKey = ([key]) => key
 export const sortKey = ([a], [b]) => a > b
 
-export const first = (...args) => args[0]
 export const second = (...args) => args[1]
 export const len = list => list.length
 

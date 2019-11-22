@@ -18,6 +18,7 @@ temp
 
 # Coverage
 .nyc_output
+coverage
 
 # Package lock
 package-lock.json

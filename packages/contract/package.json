@@ -17,7 +17,8 @@
         "url": "git+https://github.com/are/effet.git"
     },
     "scripts": {
-        "test": "run-test-harness"
+        "test": "run-test-harness",
+        "test:watch": "watch-test-harness"
     },
     "bugs": {
         "url": "https://github.com/are/effet/issues"
