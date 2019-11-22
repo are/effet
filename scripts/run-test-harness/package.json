@@ -8,7 +8,8 @@
         "chai": "4.2.0",
         "sinon": "7.5.0",
         "sinon-chai": "3.3.0",
-        "tap": "14.9.2"
+        "tap": "14.9.2",
+        "tap-dot": "2.0.0"
     },
     "bin": {
         "run-test-harness": "./run.sh"

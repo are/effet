@@ -1,0 +1,17 @@
+{
+    "name": "@scripts/standard-build",
+    "private": true,
+    "version": "0.0.1",
+    "main": "run.sh",
+    "dependencies": {
+        "@babel/core": "7.7.2",
+        "@babel/plugin-proposal-class-properties": "7.7.0",
+        "@babel/plugin-proposal-nullish-coalescing-operator": "7.4.4",
+        "@babel/preset-env": "7.7.1",
+        "rollup": "1.27.0",
+        "rollup-plugin-babel": "4.3.3"
+    },
+    "bin": {
+        "standard-build": "./run.sh"
+    }
+}
