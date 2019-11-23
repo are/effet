@@ -31,6 +31,8 @@ export function getTypeName(value) {
     return type
 }
 
+export const typeOf = getTypeName
+
 export function listDifference(as, bs, comparator) {
     return as.filter(
         a => bs.find(b => comparator(a) === comparator(b)) === undefined
