@@ -1,6 +1,6 @@
 {
     "name": "@effet/contract",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Small, functional contracts for validating data",
     "keywords": [
         "contract",
@@ -24,8 +24,8 @@
         "url": "https://github.com/are/effet/issues"
     },
     "devDependencies": {
-        "@scripts/standard-build": "0.0.1",
-        "@scripts/run-test-harness": "0.0.2",
-        "@scripts/generate-docs": "0.0.1"
+        "@scripts/generate-docs": "^0.1.0",
+        "@scripts/run-test-harness": "^0.1.0",
+        "@scripts/standard-build": "^0.1.0"
     }
 }

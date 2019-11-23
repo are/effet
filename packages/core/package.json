@@ -1,6 +1,6 @@
 {
     "name": "@effet/core",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Composable, declarative effects",
     "main": "dist/index.js",
     "scripts": {
@@ -19,8 +19,8 @@
     },
     "homepage": "https://github.com/are/effet#readme",
     "devDependencies": {
-        "@scripts/standard-build": "0.0.1",
-        "@scripts/run-test-harness": "0.0.2",
-        "@scripts/generate-docs": "0.0.1"
+        "@scripts/generate-docs": "^0.1.0",
+        "@scripts/run-test-harness": "^0.1.0",
+        "@scripts/standard-build": "^0.1.0"
     }
 }
