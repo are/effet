@@ -1,0 +1,7 @@
+test
+src
+coverage
+.nyc_output
+documentation.yml
+.babelrc
+rollup.config.js

@@ -18,7 +18,7 @@
     },
     "scripts": {
         "test": "run-test-harness",
-        "test:watch": "watch-test-harness"
+        "build": "standard-build"
     },
     "bugs": {
         "url": "https://github.com/are/effet/issues"
