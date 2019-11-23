@@ -1,4 +1,4 @@
-# 🧱✅ Contract
+# 🧱✔️ Contract
 
 > Lightweight type validation library for JavaScript
 
