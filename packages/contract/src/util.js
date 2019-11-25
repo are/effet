@@ -31,6 +31,8 @@ export function getTypeName(value) {
     return type
 }
 
+export const typeOf = getTypeName
+
 export function listDifference(as, bs, comparator) {
     return as.filter(
         a => bs.find(b => comparator(a) === comparator(b)) === undefined
@@ -43,14 +45,39 @@ export function listUnion(as, bs, comparator) {
     )
 }
 
-export function customFail() {
-    const fails = []
-    const errors = []
+export function drain(queue) {
+    let values = []
+    let fails = []
 
-    const fail = (path, message, extra) => {
-        fails.push(path[len(path) - 1])
-        errors.push({ path, message, extra })
+    while (queue.length > 0) {
+        const { type, input, path, validator, ...rest } = queue.shift()
+
+        switch (type) {
+            case 'schedule':
+                const result = validator(input, path)
+
+                queue.push(...result)
+                break
+            case 'value':
+                values.push({ type, input, path, ...rest })
+                break
+            case 'fail':
+                fails.push({ path, ...rest })
+                break
+        }
     }
 
-    return [fails, errors, fail]
+    return [values, fails]
+}
+
+export function schedule(path, input, validator) {
+    return { type: 'schedule', validator, path, input }
+}
+
+export function value(path, input) {
+    return { type: 'value', path, input }
+}
+
+export function fail(path, message, extra) {
+    return { type: 'fail', path, message, extra }
 }

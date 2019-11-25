@@ -1,7 +1,11 @@
 import {
+    TYPE,
+    drain,
+    value,
+    fail,
+    schedule,
     listDifference,
     listUnion,
-    TYPE,
     getTypeName,
     sortKey,
     idKey
@@ -10,9 +14,9 @@ import {
 export function object(shape) {
     const shapeEntries = Object.entries(shape).sort(sortKey)
 
-    return (input, { fail, path }) => {
+    return (input, path) => {
         if (!TYPE.object(input)) {
-            return fail(path, `not an object`, getTypeName(input))
+            return [fail(path, `not an object`, getTypeName(input))]
         }
 
         const entries = Object.entries(input).sort(sortKey)
@@ -21,15 +25,23 @@ export function object(shape) {
         const extraneousEntries = listDifference(entries, shapeEntries, idKey)
 
         if (missingEntries.length > 0) {
-            fail(path, `missing keys`, missingEntries.map(idKey))
+            return [fail(path, `missing keys`, missingEntries.map(idKey))]
         }
 
         if (extraneousEntries.length > 0) {
-            fail(path, `extraneous keys`, extraneousEntries.map(idKey))
+            return [fail(path, `extraneous keys`, extraneousEntries.map(idKey))]
         }
 
-        for (let [key, value] of listUnion(entries, shapeEntries, idKey)) {
-            shape[key](value, { fail, path: [...path, key] })
+        const [values, fails] = drain(
+            listUnion(entries, shapeEntries, idKey).map(([key, value]) =>
+                schedule([...path, key], value, shape[key])
+            )
+        )
+
+        if (fails.length > 0) {
+            return [fail(path, 'failed to validate object', fails)]
+        } else {
+            return [value(path, {}), ...values]
         }
     }
 }

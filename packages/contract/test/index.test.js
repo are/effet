@@ -1,4 +1,13 @@
-import { isValid, string } from '../src/index.js'
+import {
+    isValid,
+    validate,
+    string,
+    list,
+    object,
+    maybe,
+    number,
+    union
+} from '../src/index.js'
 
 describe('isValid function', () => {
     it('should return true if passes', () => {

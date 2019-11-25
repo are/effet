@@ -1,4 +1,4 @@
-import { validate, object, getTypeName, any } from '../src/index.js'
+import { getErrors, object, getTypeName, any } from '../src/index.js'
 
 describe('object validator', () => {
     const cases = [
@@ -19,7 +19,7 @@ describe('object validator', () => {
         it(`should fail when passed '${getTypeName(input)}'`, () => {
             const shape = object({})
 
-            const result = validate(shape, input)
+            const result = getErrors(shape, input)
 
             expect(result).to.deep.equal(expectedResult)
         })
@@ -29,7 +29,7 @@ describe('object validator', () => {
         const shape = object({ foo: any, bar: any })
         const input = { foo: 42 }
 
-        const result = validate(shape, input)
+        const result = getErrors(shape, input)
 
         expect(result).to.deep.equal([
             { path: [], message: 'missing keys', extra: ['bar'] }
@@ -40,7 +40,7 @@ describe('object validator', () => {
         const shape = object({ foo: any })
         const input = { foo: 42, bar: 'hello' }
 
-        const result = validate(shape, input)
+        const result = getErrors(shape, input)
 
         expect(result).to.deep.equal([
             { path: [], message: 'extraneous keys', extra: ['bar'] }
@@ -51,7 +51,7 @@ describe('object validator', () => {
         const shape = object({ foo: any, bar: any })
         const input = { foo: 42, bar: 'hello' }
 
-        const result = validate(shape, input)
+        const result = getErrors(shape, input)
 
         expect(result).to.deep.equal([])
     })

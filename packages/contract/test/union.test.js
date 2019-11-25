@@ -1,5 +1,5 @@
 import {
-    validate,
+    getErrors,
     union,
     number,
     string,
@@ -13,7 +13,7 @@ describe('union validator', () => {
         const shape = union(number, string)
         const input = 42
 
-        const result = validate(shape, input)
+        const result = getErrors(shape, input)
 
         expect(result).to.deep.equal([])
     })
@@ -22,17 +22,13 @@ describe('union validator', () => {
         const shape = union(object({ value: number }), string, boolean)
         const input = null
 
-        const result = validate(shape, input)
+        const result = getErrors(shape, input)
 
         expect(result).to.deep.equal([
             {
-                message: 'no match found for union',
+                message: 'cannot validate the union',
                 path: [],
-                extra: [
-                    { path: [0], message: 'not an object', extra: 'nil' },
-                    { path: [1], message: 'not a string', extra: 'nil' },
-                    { path: [2], message: 'not a boolean', extra: 'nil' }
-                ]
+                extra: undefined
             }
         ])
     })
@@ -45,78 +41,15 @@ describe('union validator', () => {
         const validInput = ['2', 'foo', '45']
         const invalidInput = [false, true, 'e']
 
-        const validResult = validate(shape, validInput)
-        const invalidResult = validate(shape, invalidInput)
+        const validResult = getErrors(shape, validInput)
+        const invalidResult = getErrors(shape, invalidInput)
 
         expect(validResult).to.deep.equal([])
         expect(invalidResult).to.deep.equal([
             {
-                message: 'no match found for union',
+                message: 'cannot validate the union',
                 path: [],
-                extra: [
-                    { path: [0], message: 'not a number', extra: 'list' },
-                    {
-                        path: [1],
-                        message: 'no match found for union',
-                        extra: [
-                            {
-                                path: [0],
-                                message: 'not a string',
-                                extra: 'list'
-                            },
-                            {
-                                path: [1],
-                                message: 'not a boolean',
-                                extra: 'list'
-                            },
-                            {
-                                path: [2],
-                                message: 'no match found for union',
-                                extra: [
-                                    {
-                                        path: [0],
-                                        message:
-                                            'no match found for an element of the list',
-                                        extra: [
-                                            {
-                                                path: [0, 0],
-                                                message: 'not a number',
-                                                extra: 'boolean'
-                                            },
-                                            {
-                                                path: [0, 1],
-                                                message: 'not a number',
-                                                extra: 'boolean'
-                                            },
-                                            {
-                                                path: [0, 2],
-                                                message: 'not a number',
-                                                extra: 'string'
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        path: [1],
-                                        message:
-                                            'no match found for an element of the list',
-                                        extra: [
-                                            {
-                                                path: [1, 0],
-                                                message: 'not a string',
-                                                extra: 'boolean'
-                                            },
-                                            {
-                                                path: [1, 1],
-                                                message: 'not a string',
-                                                extra: 'boolean'
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
+                extra: undefined
             }
         ])
     })

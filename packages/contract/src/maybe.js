@@ -1,9 +1,11 @@
-import { getTypeName, TYPE } from './util'
+import { TYPE, schedule, value } from './util'
 
 export function maybe(validator) {
-    return (input, { fail, path }) => {
+    return (input, path) => {
         if (!TYPE.nil(input) && !TYPE.undef(input)) {
-            validator(input, { fail, path })
+            return [schedule(path, input, validator)]
+        } else {
+            return [value(path, input)]
         }
     }
 }

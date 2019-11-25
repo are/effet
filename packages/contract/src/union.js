@@ -1,19 +1,25 @@
-import { listDifference, id, second, len, customFail } from './util'
+import {
+    drain,
+    schedule,
+    fail,
+    value,
+    listDifference,
+    id,
+    second,
+    len,
+    customFail
+} from './util'
 
 export function union(...validators) {
-    return (input, { fail, path }) => {
-        let allValidators = Array.from(Array(len(validators)), second)
+    return (input, path) => {
+        for (let validator of validators) {
+            const [values, errors] = drain(validator(input, path))
 
-        const [failedValidators, extraErrors, failCustom] = customFail()
-
-        for (let [i, validator] of validators.entries()) {
-            validator(input, { fail: failCustom, path: [i] })
+            if (errors.length === 0) {
+                return [...values]
+            }
         }
 
-        const notFailed = listDifference(allValidators, failedValidators, id)
-
-        if (notFailed.length === 0) {
-            fail(path, `no match found for union`, extraErrors)
-        }
+        return [fail(path, `cannot validate the union`)]
     }
 }
