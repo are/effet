@@ -36,5 +36,6 @@ export * from './object'
 export * from './union'
 export * from './primitives'
 export * from './maybe'
+export * from './literal'
 
 export { getTypeName } from './util'
