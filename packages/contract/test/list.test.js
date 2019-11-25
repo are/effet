@@ -1,4 +1,4 @@
-import { validate, list, string, any, union, number } from '../src/index'
+import { getErrors, list, string, any, union, number } from '../src/index'
 
 describe('list validator', () => {
     it('should fail when subvalidator fails for any element', () => {
@@ -6,11 +6,11 @@ describe('list validator', () => {
 
         const input = ['valid', 'valid', 4]
 
-        const result = validate(shape, input)
+        const result = getErrors(shape, input)
 
         expect(result).to.deep.equal([
             {
-                message: 'no match found for an element of the list',
+                message: 'cannot validate the list',
                 path: [],
                 extra: [{ path: [2], message: 'not a string', extra: 'number' }]
             }
@@ -22,7 +22,7 @@ describe('list validator', () => {
 
         const input = null
 
-        const result = validate(shape, input)
+        const result = getErrors(shape, input)
 
         expect(result).to.deep.equal([
             { message: 'not a list', path: [], extra: 'nil' }
@@ -34,7 +34,7 @@ describe('list validator', () => {
 
         const input = [0, '', false, {}, [], Symbol('symbol')]
 
-        const result = validate(shape, input)
+        const result = getErrors(shape, input)
 
         expect(result).to.deep.equal([])
     })
@@ -45,46 +45,24 @@ describe('list validator', () => {
         const validInput = ['a', 2, 'c', 4]
         const invalidInput = ['a', false, 'c', []]
 
-        const validResult = validate(shape, validInput)
-        const invalidResult = validate(shape, invalidInput)
+        const validResult = getErrors(shape, validInput)
+        const invalidResult = getErrors(shape, invalidInput)
 
         expect(validResult).to.deep.equal([])
         expect(invalidResult).to.deep.equal([
             {
-                message: 'no match found for an element of the list',
                 path: [],
+                message: 'cannot validate the list',
                 extra: [
                     {
                         path: [1],
-                        message: 'no match found for union',
-                        extra: [
-                            {
-                                path: [0],
-                                message: 'not a string',
-                                extra: 'boolean'
-                            },
-                            {
-                                path: [1],
-                                message: 'not a number',
-                                extra: 'boolean'
-                            }
-                        ]
+                        message: 'cannot validate the union',
+                        extra: undefined
                     },
                     {
                         path: [3],
-                        message: 'no match found for union',
-                        extra: [
-                            {
-                                path: [0],
-                                message: 'not a string',
-                                extra: 'list'
-                            },
-                            {
-                                path: [1],
-                                message: 'not a number',
-                                extra: 'list'
-                            }
-                        ]
+                        message: 'cannot validate the union',
+                        extra: undefined
                     }
                 ]
             }

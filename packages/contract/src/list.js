@@ -1,19 +1,26 @@
-import { listDifference, len, customFail, getTypeName, TYPE } from './util'
+import { TYPE, schedule, value, fail, typeOf, drain } from './util'
 
 export function list(validator) {
-    return (input, { fail, path }) => {
-        const [fails, extraErrors, failCustom] = customFail()
-
+    return (input, path) => {
         if (!TYPE.list(input)) {
-            return fail(path, `not a list`, getTypeName(input))
+            return [fail(path, `not a list`, typeOf(input))]
         }
 
-        for (let [i, entry] of input.entries()) {
-            validator(entry, { fail: failCustom, path: [...path, i] })
-        }
+        let [values, errors] = input.reduce(
+            ([values, errors], value, i) => {
+                const [newValues, newErrors] = drain(
+                    validator(value, [...path, i])
+                )
 
-        if (len(fails)) {
-            fail(path, `no match found for an element of the list`, extraErrors)
+                return [[...values, ...newValues], [...errors, ...newErrors]]
+            },
+            [[], []]
+        )
+
+        if (errors.length > 0) {
+            return [fail(path, 'cannot validate the list', errors)]
+        } else {
+            return [value(path, []), ...values]
         }
     }
 }
