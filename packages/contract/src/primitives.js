@@ -24,6 +24,14 @@ export function boolean(input, path) {
     }
 }
 
+export function symbol(input, path) {
+    if (!TYPE.symbol(input)) {
+        return [fail(path, `not a symbol`, typeOf(input))]
+    } else {
+        return [value(path, input)]
+    }
+}
+
 export function any(input, path) {
     if (TYPE.undef(input) || TYPE.nil(input)) {
         return [
