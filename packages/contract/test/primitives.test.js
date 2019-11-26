@@ -3,6 +3,7 @@ import {
     string,
     number,
     boolean,
+    symbol,
     getTypeName,
     any
 } from '../src/index.js'
@@ -84,6 +85,26 @@ describe('boolean validator', () => {
         const values = [true, false]
 
         const results = values.map(input => getErrors(boolean, input))
+
+        expect(results).to.deep.equal([[], []])
+    })
+})
+
+describe('symbol validator', () => {
+    it('should fail for any value that is not a symbol', () => {
+        const input = 'not a symbol'
+
+        const result = getErrors(symbol, input)
+
+        expect(result).to.deep.equal([
+            { message: 'not a symbol', path: [], extra: 'string' }
+        ])
+    })
+
+    it('should pass for any symbol', () => {
+        const values = [Symbol('a symbol'), Symbol('other symbol')]
+
+        const results = values.map(input => getErrors(symbol, input))
 
         expect(results).to.deep.equal([[], []])
     })
